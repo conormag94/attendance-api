@@ -5,28 +5,28 @@
             "room": "LB04",
             "start_time": "2018-04-02T10:00:00Z",
             "end_time": "2018-04-02T11:00:00Z",
-            "lecturer": "Dr. Hitesh Tewari"
+            "lecturer": "Dr. Joe Bloggs"
         },
         {
             "subject": "Augmented Reality",
             "room": "LB01",
             "start_time": "2018-04-04T12:00:00Z",
             "end_time": "2018-04-04T13:00:00Z",
-            "lecturer": "Dr. Aljosa Smolic"
+            "lecturer": "Dr. Jane Doe"
         },
         {
             "subject": "Augmented Reality",
             "room": "LB01",
             "start_time": "2018-04-02T11:00:00Z",
             "end_time": "2018-04-02T12:00:00Z",
-            "lecturer": "Dr. Aljosa Smolic"
+            "lecturer": "Dr. Jane Doe"
         },
         {
             "subject": "Security & Privacy",
             "room": "LB04",
             "start_time": "2018-04-02T16:00:00Z",
             "end_time": "2018-04-02T18:00:00Z",
-            "lecturer": "Dr. Aljosa Smolic"
+            "lecturer": "Dr. Joe Bloggs"
         }
     ]
 }
