@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify, request
 from sqlalchemy import exc
 
 from project import db
-from project.models import Schedule
+from project.models import Schedule, Lecture
 
 from flask import current_app as app
 
@@ -16,10 +16,19 @@ def index():
 
 @schedule.route('/schedules', methods=['GET'])
 def list_schedules():
-    schedules = [table.to_dict() for table in Schedule.query.all()]
+    lectures = [table.to_dict() for table in Lecture.query.all()]
     response = {
         'status': 'success',
-        'schedules': schedules
+        'schedules': lectures
+    }
+    return jsonify(response), 200
+
+@schedule.route('/schedules/<room>', methods=['GET'])
+def get_schedule(room):
+    schedules = [lecture.to_dict() for lecture in Lecture.query.filter_by(room=room).all()]
+    response = {
+        'room': room,
+        'schedule': schedules
     }
     return jsonify(response), 200
 

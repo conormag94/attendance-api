@@ -1,7 +1,10 @@
+import json
+import os
+
 from flask_script import Manager
 
 from project import create_app, db
-from project.models import Schedule
+from project.models import Schedule, Lecture
 
 app = create_app()
 manager = Manager(app)
@@ -15,8 +18,17 @@ def recreate_db():
 
 @manager.command
 def seed_db():
-    db.session.add(Schedule(name="Sample schedule"))
-    db.session.commit()
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    filepath = os.path.join(current_directory, 'seeds.json')
+
+    with open(filepath, 'r') as f:
+        data = json.load(f)
+
+    for entry in data['lectures']:
+        lecture = Lecture()
+        lecture.from_dict(entry)
+        db.session.add(lecture)
+        db.session.commit()
 
 if __name__ == '__main__':
     manager.run()
