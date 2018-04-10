@@ -19,8 +19,8 @@ class Lecture(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     room = db.Column(db.String(128), nullable=False)
     subject = db.Column(db.String(128), nullable=False)
-    start_time = db.Column(db.DateTime, nullable=False)
-    end_time = db.Column(db.DateTime, nullable=False)
+    start_time = db.Column(db.DateTime(timezone=True), nullable=False)
+    end_time = db.Column(db.DateTime(timezone=True), nullable=False)
     lecturer = db.Column(db.String(128))
 
     def to_dict(self):

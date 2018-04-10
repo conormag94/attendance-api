@@ -1,3 +1,4 @@
+import datetime
 import sys
 
 from flask import Blueprint, jsonify, request
@@ -31,5 +32,25 @@ def get_schedule(room):
         'schedule': schedules
     }
     return jsonify(response), 200
+
+@schedule.route('/test', methods=['GET'])
+def test_date_string():
+    now = datetime.datetime.now() + datetime.timedelta(hours=1) #Hardcoding for Daylight savings for the moment
+    start_time = now + datetime.timedelta(seconds=10)
+    end_time = start_time + datetime.timedelta(seconds=30)
+    lecture = {
+        'id': 0,
+        'lecturer': 'Dr. Test Testington',
+        'subject': 'TEST LECTURE',
+        'room': 'LB08',
+        'start_time': start_time.strftime('%a, %d %b %Y %H:%M:%S'),
+        'end_time': end_time.strftime('%a, %d %b %Y %H:%M:%S')
+    }
+    response = {
+        'status': 'success',
+        'schedule': [lecture]
+    }
+    return jsonify(response), 200
+
 
     
