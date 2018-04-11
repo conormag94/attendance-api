@@ -4,7 +4,7 @@ import os
 from flask_script import Manager
 
 from project import create_app, db
-from project.models import Schedule, Lecture
+from project.models import Lecture, AttendanceRecord
 
 app = create_app()
 manager = Manager(app)
@@ -29,6 +29,11 @@ def seed_db():
         lecture.from_dict(entry)
         db.session.add(lecture)
         db.session.commit()
+
+    l = Lecture.query.filter_by(room='LB04').first()
+    db.session.add(AttendanceRecord(student_number='1234', lecture=l))
+    db.session.add(AttendanceRecord(student_number='5678', lecture=l))
+    db.session.commit()
 
 if __name__ == '__main__':
     manager.run()

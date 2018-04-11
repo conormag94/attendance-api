@@ -5,7 +5,7 @@ from flask import Blueprint, jsonify, request
 from sqlalchemy import exc
 
 from project import db
-from project.models import Schedule, Lecture
+from project.models import Lecture, AttendanceRecord
 
 from flask import current_app as app
 
@@ -52,5 +52,29 @@ def test_date_string():
     }
     return jsonify(response), 200
 
-
+@schedule.route('/lectures/<id>', methods=['GET', 'POST'])
+def get_lecture(id):
+    lecture = Lecture.query.get(id)
+    if not lecture:
+        return jsonify({'status': 'fail', 'message': 'Lecture does not exist'}), 404
+    
+    if request.method == 'GET':
+        students = [student.student_number for student in lecture.students]
+        response = {
+            'status': 'success',
+            'lecture': lecture.to_dict(),
+            'students': students
+        }
+        return jsonify(response), 200
+    elif request.method == 'POST':
+        params = request.get_json()
+        student_numbers = params.get('student_numbers')
+        for number in student_numbers:
+            record = AttendanceRecord(student_number=number, lecture=lecture)
+            db.session.add(record)
+            db.session.commit()
+        return jsonify({
+            'status': 'success', 
+            'message': 'Attendance for lecture {0} recorded'.format(lecture.id)
+        }), 201
     
