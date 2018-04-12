@@ -36,10 +36,10 @@ def get_schedule(room):
 @schedule.route('/test', methods=['GET'])
 def test_date_string():
     now = datetime.datetime.now() + datetime.timedelta(hours=1) #Hardcoding for Daylight savings for the moment
-    start_time = now + datetime.timedelta(seconds=10)
+    start_time = now + datetime.timedelta(seconds=15)
     end_time = start_time + datetime.timedelta(seconds=30)
     lecture = {
-        'id': 0,
+        'id': 1,
         'lecturer': 'Dr. Test Testington',
         'subject': 'TEST LECTURE',
         'room': 'LB08',
